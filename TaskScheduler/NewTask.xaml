@@ -1,0 +1,78 @@
+﻿<Window x:Class="TaskScheduler.NewTask"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="NewTask" Height="420" Width="354" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Label FontFamily="Arial Black" FontSize="24"
+               Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"
+               Margin="0 5 0 0">New task</Label>
+        
+        <!--Labels-->
+        <Label Grid.Row="1">Name:*</Label>
+        <Label Grid.Row="2">File:*</Label>
+        <Label Grid.Row="3">Arguments(optional)</Label>
+        <Label Grid.Row="4" VerticalAlignment="Center">Trigger: *</Label>
+        
+        <!--TextBoxes-->
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="2" Name="tbName"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="2" Width="160" Name="tbFile"/>
+            <Button Margin="2" Name="btnExplore" Click="btnExplore_Click">Browse...</Button>
+        </StackPanel>
+
+        <TextBox Grid.Column="1" Grid.Row="3" Margin="2" Name="tbArguments"/>
+
+        <StackPanel Grid.Row="4" Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Margin="2" Name="rbOnce" Checked="rbOnce_Checked">Once</RadioButton>
+                <RadioButton Margin="2" Name="rbDaily" Checked="rbDaily_Checked">Daily</RadioButton>
+            </StackPanel>
+            <TabControl  Height="188" Name="tabControl" Width="215" HorizontalAlignment="Left">
+                <TabItem Header="Once" IsEnabled="False" Visibility="Hidden" Height="1">
+                    <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                        <DatePicker Name="DatePickerOnce" Margin="2"/>
+                        <ComboBox  Margin="2" Name="cbHoursTriggerOnce"/>
+                        <Label>:</Label>
+                        <ComboBox  Margin="2" Name="cbMinutesTriggerOnce"/>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Daily" IsEnabled="False" Visibility="Hidden"  Height="1">
+                    <StackPanel>
+                        <Label>Start at:</Label>
+                        <StackPanel Orientation="Horizontal">
+                            <DatePicker Name="DatePickerDaily"  Margin="2"/>
+                            <ComboBox  Margin="2" Name="cbHoursTriggerDaily"/>
+                            <Label>:</Label>
+                            <ComboBox  Margin="2" Name="cbMinutesTriggerDaily"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Repeat every</Label>
+                            <TextBox Name="tbRepeatDaily" Margin="2" Width="20" Height="20" TextChanged="tbRepeatDaily_TextChanged"/>
+                            <Label>days</Label>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+
+        <Button Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="100"
+                Name="btnAdd" Click="btnAdd_Click">Add</Button>
+    </Grid>
+</Window>
